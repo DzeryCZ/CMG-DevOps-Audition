@@ -14,6 +14,7 @@ build:
   image: guss77/dind-awscli
   stage: build
   script:
+    - aws ecr get-login
     - $(aws ecr get-login)
     # Build production ready image
     - docker build -t $DOCKER_IMAGE:$VERSION -f ./docker/Dockerfile .
@@ -41,3 +42,5 @@ deploy:
   stage: deploy
   script:
     - echo "todo"
+  only:
+    master

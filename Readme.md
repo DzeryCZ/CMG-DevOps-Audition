@@ -19,7 +19,5 @@
   - Run `terraform apply -var-file="./config/staging.tfvars"`
 - Kubectl setup
   - Add cluster to kubectl context `aws eks --region eu-west-1 update-kubeconfig --name cmg`
-  
-  
-  `aws ecr get-login-password --region eu-west-1`
-  aws ecr get-login-password | docker login --username AWS --password-stdin 782490189373.dkr.ecr.eu-west-1.amazonaws.com
+- Building Image
+  - Just run defined **Gitlab** pipeline
