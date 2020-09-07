@@ -11,9 +11,10 @@ stages:
   - deploy
 
 build:
+  image: guss77/dind-awscli
   stage: build
   script:
-    - aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY
+    - $(aws ecr get-login)
     # Build production ready image
     - docker build -t $DOCKER_IMAGE:$VERSION -f ./docker/Dockerfile .
     # Build test image
