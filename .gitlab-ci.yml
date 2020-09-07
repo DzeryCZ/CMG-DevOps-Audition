@@ -1,5 +1,4 @@
 variables:
-  DOCKER_HOST: tcp://localhost:2375
   ECR_REGISTRY: 782490189373.dkr.ecr.eu-west-1.amazonaws.com
   DOCKER_IMAGE: $ECR_REGISTRY/cmg
   GITLAB_REGISTRY: registry.gitlab.com/dzerycz/cmg-devops-audition
@@ -15,12 +14,12 @@ build:
   image: guss77/dind-awscli
   stage: build
   script:
-    - $(aws ecr get-login --no-include-email)
+#    - $(aws ecr get-login --no-include-email)
     # Build production ready image
     - docker build -t $DOCKER_IMAGE:$VERSION -f ./docker/Dockerfile .
     # Build test image
     - docker build -t $GITLAB_REGISTRY:test-$VERSION -f ./docker/Dockerfile-test --build-arg BASE_IMAGE=$DOCKER_IMAGE:$VERSION .
-    - docker push $DOCKER_IMAGE:latest
+#    - docker push $DOCKER_IMAGE:latest
     - docker push $GITLAB_REGISTRY:test-$VERSION
 
 lint:
