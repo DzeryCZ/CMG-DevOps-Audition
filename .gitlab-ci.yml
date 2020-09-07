@@ -43,4 +43,4 @@ deploy:
   script:
     - echo "todo"
   only:
-    master
+    - master
