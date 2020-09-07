@@ -14,8 +14,8 @@ build:
   image: guss77/dind-awscli
   stage: build
   script:
-    - aws ecr get-login
-    - $(aws ecr get-login)
+    - aws ecr get-login --no-include-email
+    - $(aws ecr get-login --no-include-email)
     # Build production ready image
     - docker build -t $DOCKER_IMAGE:$VERSION -f ./docker/Dockerfile .
     # Build test image
