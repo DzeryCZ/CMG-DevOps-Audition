@@ -1,5 +1,5 @@
 variables:
-  DOCKER_HOST: tcp://docker:2375
+  DOCKER_HOST: tcp://localhost:2375
   ECR_REGISTRY: 782490189373.dkr.ecr.eu-west-1.amazonaws.com
   DOCKER_IMAGE: $ECR_REGISTRY/cmg
   GITLAB_REGISTRY: registry.gitlab.com/dzerycz/cmg-devops-audition
