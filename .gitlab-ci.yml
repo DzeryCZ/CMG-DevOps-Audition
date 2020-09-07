@@ -1,0 +1,43 @@
+variables:
+  ECR_REGISTRY: 782490189373.dkr.ecr.eu-west-1.amazonaws.com
+  DOCKER_IMAGE: $ECR_REGISTRY/cmg
+  GITLAB_REGISTRY: registry.gitlab.com/dzerycz/cmg-devops-audition
+  VERSION: $CI_PIPELINE_ID
+
+
+stages:
+  - build
+  - lint
+  - test
+  - deploy
+
+build:
+  stage: build
+  scripts:
+    aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY
+    # Build production ready image
+    docker build -t $DOCKER_IMAGE:$VERSION -f ./docker/Dockerfile .
+    # Build test image
+    docker build -t $GITLAB_REGISTRY:test-$VERSION -f ./docker/Dockerfile-test --build-arg BASE_IMAGE=$DOCKER_IMAGE:$VERSION .
+    docker push $DOCKER_IMAGE:latest
+    docker push $GITLAB_REGISTRY:test-$VERSION
+
+lint:
+  image: $GITLAB_REGISTRY:test-$VERSION
+  variables:
+    EXCLUDE_PATHS: .git,__pycache__,.pytest_cache,.idea,venv,local,docker,terraform,helm
+  stage: lint
+  scripts:
+    flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude $EXCLUDE_PATHS
+    flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude $EXCLUDE_PATHS
+
+test:
+  image: $GITLAB_REGISTRY:test-$VERSION
+  stage: test
+  scripts:
+    pytest
+
+deploy:
+  stage: deploy
+  script:
+    - echo "todo"

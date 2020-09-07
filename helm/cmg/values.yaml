@@ -1,0 +1,7 @@
+image:
+  repository: #todo
+  pullPolicy: Always
+  tag: "latest"
+
+restartPolicy: Never
+backoffLimit: 4

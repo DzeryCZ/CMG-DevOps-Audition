@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Job
+metadata:
+  name: {{ include "cmg.fullname" . }}
+  namespace: {{ include "cmg.fullname" . }}
+spec:
+  template:
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+      restartPolicy: {{ .Values.restartPolicy }}
+    backoffLimit: {{ .Values.backoffLimit }}
