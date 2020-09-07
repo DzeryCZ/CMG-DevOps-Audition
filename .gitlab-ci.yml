@@ -13,7 +13,7 @@ stages:
 
 build:
   stage: build
-  scripts:
+  script:
     aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY
     # Build production ready image
     docker build -t $DOCKER_IMAGE:$VERSION -f ./docker/Dockerfile .
@@ -27,14 +27,14 @@ lint:
   variables:
     EXCLUDE_PATHS: .git,__pycache__,.pytest_cache,.idea,venv,local,docker,terraform,helm
   stage: lint
-  scripts:
+  script:
     flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude $EXCLUDE_PATHS
     flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude $EXCLUDE_PATHS
 
 test:
   image: $GITLAB_REGISTRY:test-$VERSION
   stage: test
-  scripts:
+  script:
     pytest
 
 deploy:
