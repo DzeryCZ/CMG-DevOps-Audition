@@ -11,6 +11,7 @@ stages:
   - deploy
 
 build:
+  image: guss77/dind-awscli
   stage: build
   script:
     - aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY
