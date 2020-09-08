@@ -11,7 +11,7 @@ stages:
   - deploy
 
 build:
-  image: guss77/dind-awscli
+  image: dind #guss77/dind-awscli
   stage: build
   script:
 #    - $(aws ecr get-login --no-include-email)

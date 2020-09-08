@@ -14,3 +14,8 @@ variable "worker_node_instance_type" {
   description = "Instance type of Workers"
   type = string
 }
+
+variable "number_of_workers" {
+  description = "Number of EKS Workers"
+  type = number
+}

@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
     bucket = "jz-terraform-backend"
-    key    = "cmg-networking.tfstate"
+    key    = "cmg/networking.tfstate"
     region = "eu-west-1"
   }
 }
