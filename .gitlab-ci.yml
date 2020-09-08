@@ -11,7 +11,7 @@ stages:
   - deploy
 
 build:
-  image: docker #guss77/dind-awscli
+#  image: docker #guss77/dind-awscli
   stage: build
   script:
 #    - $(aws ecr get-login --no-include-email)
@@ -21,6 +21,8 @@ build:
     - docker build -t $GITLAB_REGISTRY:test-$VERSION -f ./docker/Dockerfile-test --build-arg BASE_IMAGE=$DOCKER_IMAGE:$VERSION .
 #    - docker push $DOCKER_IMAGE:latest
     - docker push $GITLAB_REGISTRY:test-$VERSION
+  tags:
+    - docker
 
 lint:
   image: $GITLAB_REGISTRY:test-$VERSION
