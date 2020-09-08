@@ -17,7 +17,7 @@ build:
   script:
 #    - $(aws ecr get-login --no-include-email)
     # Build production ready image
-    - docker build -t $DOCKER_IMAGE:$VERSION -f ./docker/Dockerfile .
+    - sudo docker build -t $DOCKER_IMAGE:$VERSION -f ./docker/Dockerfile .
     # Build test image
     - docker build -t $GITLAB_REGISTRY:test-$VERSION -f ./docker/Dockerfile-test --build-arg BASE_IMAGE=$DOCKER_IMAGE:$VERSION .
 #    - docker push $DOCKER_IMAGE:latest
