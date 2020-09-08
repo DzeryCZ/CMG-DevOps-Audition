@@ -15,16 +15,16 @@ stages:
   - deploy
 
 build:
-  image: docker:latest #guss77/dind-awscli
+  image: docker:latest
   stage: build
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-#    - $(aws ecr get-login --no-include-email)
+    - $(aws ecr get-login --no-include-email)
     # Build production ready image
     - docker build -t $DOCKER_IMAGE:$VERSION -f ./docker/Dockerfile .
     # Build test image
     - docker build -t $GITLAB_REGISTRY:test-$VERSION -f ./docker/Dockerfile-test --build-arg BASE_IMAGE=$DOCKER_IMAGE:$VERSION .
-#    - docker push $DOCKER_IMAGE:latest
+    - docker push $DOCKER_IMAGE:latest
     - docker push $GITLAB_REGISTRY:test-$VERSION
   tags:
     - docker
@@ -47,6 +47,6 @@ test:
 deploy:
   stage: deploy
   script:
-    - echo "todo"
+    - helm upgrade --install cmg -f ./helm/cmg/values.yaml ./helm/cmg --atomic --set image.tag=${VERSION}
   only:
     - master

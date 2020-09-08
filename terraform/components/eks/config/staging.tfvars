@@ -6,5 +6,5 @@ tags = {
 }
 
 # EKS
-worker_node_instance_type = "t3.nano"
+worker_node_instance_type = "t3.small"
 number_of_workers = 1
