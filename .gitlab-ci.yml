@@ -3,6 +3,7 @@ variables:
   DOCKER_IMAGE: $ECR_REGISTRY/cmg
   GITLAB_REGISTRY: registry.gitlab.com/dzerycz/cmg-devops-audition
   VERSION: $CI_PIPELINE_ID
+  DOCKER_TLS_CERTDIR: ""
 
 stages:
   - build
