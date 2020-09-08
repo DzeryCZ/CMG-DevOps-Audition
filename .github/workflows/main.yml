@@ -45,7 +45,9 @@ jobs:
 #        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude .git,__pycache__,.pytest_cache,.idea,package,venv,local
 #        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
 #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude .git,__pycache__,.pytest_cache,.idea,package,venv,local
-    - name: Test with pytest
-      uses: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-west-1.amazonaws.com/cmg:${{ github.sha }}
-      run: |
-        pytest
+  test:
+    container: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-west-1.amazonaws.com/cmg:${{ github.sha }}
+
+    steps:
+      - name: Test with pytest
+        run: pytest
