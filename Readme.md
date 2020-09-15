@@ -1,5 +1,7 @@
 # CMG Engineering Audition
 
+- [Instructions](./Instructuins.md)
+
 ## Components
 
 - Python code of the project itself
