@@ -17,6 +17,7 @@
   - AWS_ACCESS_KEY_ID
   - AWS_SECRET_ACCESS_KEY
   - AWS_DEFAULT_REGION
+  - AWS_ACCOUNT_ID
 - Furthermore there should be Gitlab <> Kubernetes integration set up
 
 ## Local development

@@ -1,5 +1,5 @@
 variables:
-  ECR_REGISTRY: 782490189373.dkr.ecr.eu-west-1.amazonaws.com
+  ECR_REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.eu-west-1.amazonaws.com
   DOCKER_IMAGE: $ECR_REGISTRY/cmg
   GITLAB_REGISTRY: registry.gitlab.com/dzerycz/cmg-devops-audition
   VERSION: $CI_PIPELINE_ID
