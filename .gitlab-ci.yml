@@ -15,7 +15,7 @@ stages:
   - deploy
 
 build:
-  image: mesosphere/aws-cli:1.14.5
+  image: dzerycz/aws-cli-dind:1.18.0
   stage: build
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
